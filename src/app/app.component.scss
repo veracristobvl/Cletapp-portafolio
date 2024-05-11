@@ -1,0 +1,20 @@
+/* Estilos para el menú lateral */
+ion-menu {
+    --ion-background-color: #262626; /* Color de fondo */
+    color: #ffffff; /* Color de texto */
+  }
+  
+  /* Estilos para los elementos del menú */
+  ion-item {
+    color: #ffffff; /* Color de texto */
+  }
+  
+  /* Estilos para el botón de inicio de sesión */
+  ion-item.log-in {
+    --color: #ffffff; /* Color de texto */
+  }
+
+  ion-menu-button {
+    color: whitesmoke; /* Color de texto */
+  }
+

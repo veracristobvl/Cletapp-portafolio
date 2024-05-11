@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Perfil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div style="display: flex; justify-content: center; margin: 20px;">
+    <ion-avatar (click)="seleccionarNuevaFoto()">
+      <img *ngIf="photoURL" [src]="photoURL" alt="Foto de perfil">
+      <ion-icon name="create-outline"></ion-icon>
+    </ion-avatar>
+  </div>
+
+  <ion-card *ngIf="userData">
+    <ion-card-content>
+      <ion-list lines="full">
+        <ion-item>
+          <ion-label position="stacked">Nombre</ion-label>
+          <h1>{{userData.nombre}}</h1>
+          <ion-icon slot="end" (click)="abrirModalModificar('nombre', userData.nombre)" name="create-outline"></ion-icon>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Apellido</ion-label>
+          <h1>{{userData.apellido}}</h1>
+          <ion-icon slot="end" (click)="abrirModalModificar('apellido', userData.apellido)" name="create-outline"></ion-icon>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Nick Name</ion-label>
+          <h1>{{userData.nickname}}</h1>
+          <ion-icon slot="end" (click)="abrirModalModificar('nickname', userData.nickname)" name="create-outline"></ion-icon>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Correo</ion-label>
+          <h1>{{userData.email}}</h1>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

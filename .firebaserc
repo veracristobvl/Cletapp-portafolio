@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "mapa-prueba-2-783e3": {
+      "hosting": {
+        "app": [
+          "mapa-prueba-2-783e3"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "mapa-prueba-2-783e3"
+  }
+}

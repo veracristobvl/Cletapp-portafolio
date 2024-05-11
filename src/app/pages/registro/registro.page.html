@@ -1,0 +1,42 @@
+
+<ion-content>
+  <!-- Contenedor Principal -->
+  <div class="main">
+
+    <form class="formulario" [formGroup]="myForm">
+      <h1>Registro</h1>
+    <ion-list>
+
+      <ion-item>
+        <ion-label position="floating">Nombre</ion-label>
+        <ion-input  type="text" [(ngModel)]="nombre" name="nombre"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Apellido</ion-label>
+        <ion-input  type="text" [(ngModel)]="apellido" name="apellido"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Nombre de Usuario</ion-label>
+        <ion-input  type="text" [(ngModel)]="username" name="username"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Email</ion-label>
+        <ion-input  type="email" [(ngModel)]="email" name="email"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Contraseña</ion-label>
+        <ion-input  type="password" [(ngModel)]="password" name="password"></ion-input>
+      </ion-item>
+  </ion-list>
+  <!-- Input para seleccionar la foto de perfil 
+    <input type="file" (change)="selectPhoto($event)">-->
+    <ion-button expand="block" (click)="registrar()">Registrarse</ion-button>
+    <ion-button expand="block" (click)="volver()">Volver</ion-button>
+  </form>
+  
+</div>
+</ion-content>

@@ -1,0 +1,83 @@
+/* Estilos para la página de inicio de sesión */
+ion-content {
+    --background: url('../../assets/images/bicicleta-background.jpg') no-repeat center center / cover; /* Color de fondo */
+    color: #ffffff; /* Color de texto */
+    
+    *{
+      font-family: 'Poppins','sans-serif';
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+  }
+
+  .main{
+    padding: 3rem !important; 
+    border: 0px solid white;
+    height: 100vh;
+    display: flex;
+    justify-content: space-around; /* Centra horizontalmente */
+    align-items: center; 
+    flex-direction: column;
+   
+  }
+  
+  ion-list{
+    background-color: transparent;
+  }
+
+
+  /* ----------------- Estilos para el formulario de inicio de sesión ------------------------ */
+  ion-item{
+    --background:#F4EBD0 ;
+    margin-bottom: 1rem !important; 
+    border-radius: 15px;
+    border: none;
+    ion-label{
+    --color: #122620; /* Color de texto */
+
+    }
+  }
+  
+  ion-input {
+    height: 60px;
+    --color: #122620; /* Color de texto */
+  }
+
+
+
+.formulario{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo{
+  border: 0px solid white;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  .logo-image{
+    width: 100%;
+    height: auto;
+    img{
+      width: 100%;
+      height: auto;
+      max-height: 10rem;
+      max-width: 10rem;
+    }
+  }
+
+  .logo-nombre{
+    h1{
+      letter-spacing: 10px;
+      font-size: 3rem;
+      font-weight: 600;
+    }
+  }
+}
+
+ion-button{
+  --background:rgba(55,204,138,255);
+}

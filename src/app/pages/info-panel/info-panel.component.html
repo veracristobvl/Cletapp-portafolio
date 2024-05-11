@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Información del Lugar</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">Cerrar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div style="background-color: white; padding: 10px; width:100%;">
+    <p style="font-weight: bold; color: black;">Nombre del lugar: {{ nombreLugar }}</p>
+    <p style="font-weight: bold; color: black;">Titulo: {{ titulo }}</p>
+    <p style="font-weight: bold; color: black;">Latitud: {{ lat }}</p>
+    <p style="font-weight: bold; color: black;">Longitud: {{ lng }}</p>
+    <div style="margin-bottom: 10px;">
+      <img src="{{ url }}" alt="Street View" style="width: 100%; border-radius: 5px;">
+    </div>
+
+    <ion-card style="background-color: #242e3e;">
+      <ion-card-header>
+        <ion-card-title>Agregar Comentario</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item>
+          <ion-label>Valoración:</ion-label>
+          <ion-icon *ngFor="let star of [1, 2, 3, 4, 5]"
+              name="star"
+              (click)="rating = star"
+              [color]="star <= rating ? 'warning' : 'medium'">
+          </ion-icon>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Nombre</ion-label>
+          <ion-input [(ngModel)]="nombreComentario"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Comentario</ion-label>
+          <ion-textarea [(ngModel)]="textoComentario"></ion-textarea>
+        </ion-item>
+        <ion-button color="dark" expand="block" (click)="agregarComentario()">Agregar Comentario</ion-button>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card *ngFor="let comentario of comentarios">
+      <ion-card-header>
+        <ion-card-title>{{ comentario.nombre }}</ion-card-title>
+        <ion-card-subtitle>Valoración: {{ getStars(comentario.rating) }}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>{{ comentario.texto }}</ion-card-content>
+    </ion-card>
+    
+  </div>
+</ion-content>

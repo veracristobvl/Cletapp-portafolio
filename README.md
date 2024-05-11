@@ -1,0 +1,2 @@
+instalar:
+npm install
