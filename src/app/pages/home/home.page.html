@@ -5,8 +5,16 @@
     </ion-title>
   </ion-toolbar>
 </ion-header>
+
 <ion-content>
-  <ion-searchbar [(ngModel)]="searchQuery" (ionChange)="search()" placeholder="Buscar lugares" style="width: 300px !important; background: wheat;"></ion-searchbar>
+
+  <ion-searchbar [(ngModel)]="searchQuery" 
+                (ionChange)="search()" 
+                placeholder="Buscar lugares" 
+                animated="true" 
+                show-clear-button="focus" 
+                color="medium">
+  </ion-searchbar>
 
   <div id="map"></div>
   <ion-grid style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1;">

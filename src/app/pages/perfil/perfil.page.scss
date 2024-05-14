@@ -1,7 +1,20 @@
 ion-avatar {
     --border-radius: 50%;
-    width: 150px;
-    height: 150px;
-    border: 3px solid #d49462;
-    background-color: #f0f0f0;
+    width: 160px;
+    height: 160px;
+    border: 3px solid #14248a;
+    color: black;
+}
+
+ion-card {
+    --background: #ece8f2;
+}
+
+ion-content {
+    --background: #f9f5ff;
+}
+
+ion-item{
+    --background: white;
+    --color: black;
 }

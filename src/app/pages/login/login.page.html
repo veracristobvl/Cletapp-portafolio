@@ -1,40 +1,162 @@
+<!-- Inicio Formulario de cambio de contraseña -->
+<ion-grid class="modal-container" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1;">
+  <ion-row>
+    <ion-col size="12" size-md="6">
+      <ion-card *ngIf="mostrarFormulario" class="modal-content" trigger>
+        <ion-card-header>
+          <ion-card-title class="modal-title">Recuperar Contraseña</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+
+          <div class="input-item">
+            <input color="light" type="email" placeholder="ejemplo@mail.com" [(ngModel)]="emailRecuperacion">
+          </div>
+          <ion-button expand="block" (click)="sendResetEmail()">Enviar Correo</ion-button>
+          <ion-button expand="block"  color="danger" (click)="mostrarFormulario = false">Cerrar</ion-button>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+<!-- Inicio Formulario de cambio de contraseña -->
+
 <ion-content [fullscreen]="true">
-  
-  
-  
+  <!-- Contenedor principal -->
   <div class="main">
-    
-    <div class="logo">
-      <div class="logo-image">
-        <img src="../../assets/images/cletapp-logo-removebg-preview.png" alt="">
+    <!-- Título de pagina -->
+    <div class="title">
+      <h2>INICIAR SESIÓN</h2>
+    </div>
+    <!-- Inicio del input email -->
+    <form [formGroup]="formularioLogin" (ngSubmit)="login()">
+      <div class="input-item">
+        <label position="stacked" >Email</label>
+        <input
+          type="email"
+          formControlName="email"
+          name="email"
+          placeholder="ejemplo@mail.com"
+        />
+        <div
+          *ngIf="formularioLogin.get('email').hasError('required') && formularioLogin.get('email').touched"
+          class="mensaje-error"
+        >
+          El email es requerido.
+        </div>
+        <div
+          *ngIf="formularioLogin.get('email').hasError('email') && formularioLogin.get('email').touched"
+          class="mensaje-error"
+        >
+          Ingresa un email válido
+        </div>
       </div>
-      <div class="logo-nombre">
-        <h1>CLETAPP</h1>
+
+      <!-- Inicio Input de Contraseña -->
+      <div class="input-item">
+        <label position="stacked">Contraseña</label>
+        <input
+          type="password"
+          formControlName="password"
+          name="password"
+          placeholder="Ingresa tu contraseña"
+        />
+        <div
+          *ngIf="formularioLogin.get('password').hasError('required') && formularioLogin.get('password').touched"
+          class="mensaje-error"
+        >
+          La contraseña es requerida.
+        </div>
+      </div>
+      <!-- Fin Input de Contraseña -->
+
+
+      <ion-button
+        expand="block"
+        type="submit"
+        [disabled]="!formularioLogin.valid"
+        >Login</ion-button>
+
+      <!-- <ion-button expand="block" (click)="login()">INICIAR SESIÓN</ion-button> -->
+
+      <ion-loading #loading></ion-loading>
+
+      <ion-button 
+        routerLink="/registro" 
+        expand="block">
+        Registrate
+      </ion-button>
+
+      <ion-button
+        expand="block"
+        (click) = "loginAsGuest()"
+        >Entrar como Invitado</ion-button
+      >
+    </form>
+
+    <a style="font-size: 18px; color: black; text-align: center;" (click)="forgotPassword()">¿Olvidaste tu contraseña?</a>
+
+    <!-- Inicio de login con red social -->
+    <div
+      style="
+        border-top: 1px solid rgb(206, 204, 204);
+        width: 100%;
+        text-align: center;
+        margin: 2rem 0 0 0;
+        position: relative;
+      "
+    >
+      <p
+        style="
+          position: relative;
+          bottom: 17.2px;
+          background-color: #14248a;
+          width: fit-content;
+          padding: 0.5rem;
+          font-size: 0.75rem;
+          margin: 0 auto;
+          border-radius: 10px;
+        "
+      >
+        También ingresa con
+      </p>
+    </div>
+    <div class="redes-sociales">
+      <div class="apple">
+        <a href="" >
+          <img src="../../../assets/images/apple.png" alt="" />
+        </a>
+      </div>
+      <div class="google">
+        <a (click)="loginWithGoogle()">
+          <img src="../../../assets/images/google.png" alt="" />
+        </a>
+      </div>
+      <div class="facebook" style="color: green">
+        <a (click)="loginWithFacebook()" >
+          <img src="../../../assets/images/facebook.png" alt="" />
+        </a>
       </div>
     </div>
-    
-    <div class="formulario" >
-      <!-- /<h1>Inicio De Sesión</h1> -->
-      <ion-list  class="ion-no-margin ion-no-padding">
-        <ion-item>
-        <ion-label position="floating">Email </ion-label>
-        <ion-input type="email" [(ngModel)]="email" ></ion-input>
-      </ion-item>
-      
-      <ion-item>
-        <ion-label position="floating">Contraseña </ion-label>
-        <ion-input type="password" [(ngModel)]="password" ></ion-input>
-      </ion-item>
-    
-    </ion-list>
-    <ion-button style=" --color: #ffffff; margin: 20px 0;" expand="block" (click)="login()">Iniciar sesión</ion-button>
-    <p>¿No tienes cuenta?</p>
-    <ion-button (click)="onClick()" size="small" >REGISTRATE!</ion-button>  
-  
   </div>
-    
-  </div >
-
-
-
+  <!-- Fin de login con red social -->
 </ion-content>
+
+<!-- <ion-list>
+  <ion-item>
+    <ion-label position="floating">Email: </ion-label>
+    <ion-input type="email" [(ngModel)]="email"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Contraseña: </ion-label>
+    <ion-input type="password" [(ngModel)]="password"></ion-input>
+  </ion-item>
+</ion-list>
+<a style="font-size: 18px; margin: 10px; color: whitesmoke;" (click)="forgotPassword()">¿Olvidaste tu contraseña?</a>
+<ion-button color="dark" (click)="onClick()" style="width: 220px;">REGISTRATE!</ion-button>  
+<ion-button color="dark" expand="block" style="width: 220px;" (click)="loginAsGuest()">
+  ENTRAR <br> COMO INVITADO
+</ion-button>
+<ion-button color="dark" expand="block" style="width: 220px;" (click)="loginWithGoogle()">
+  ENTRAR <br> CON GOOGLE
+</ion-button> 
+-->
