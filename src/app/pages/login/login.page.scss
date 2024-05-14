@@ -1,83 +1,134 @@
-/* Estilos para la página de inicio de sesión */
-ion-content {
-    --background: url('../../assets/images/bicicleta-background.jpg') no-repeat center center / cover; /* Color de fondo */
-    color: #ffffff; /* Color de texto */
-    
-    *{
-      font-family: 'Poppins','sans-serif';
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-  }
 
-  .main{
-    padding: 3rem !important; 
-    border: 0px solid white;
-    height: 100vh;
-    display: flex;
-    justify-content: space-around; /* Centra horizontalmente */
-    align-items: center; 
-    flex-direction: column;
-   
-  }
-  
-  ion-list{
-    background-color: transparent;
-  }
+// ESITLOS AGREGADOS POR VERA
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+ion-content{
+  --background: #f9f5ff;
+  display: flex;
+  justify-content: center;;
+}
 
-  /* ----------------- Estilos para el formulario de inicio de sesión ------------------------ */
-  ion-item{
-    --background:#F4EBD0 ;
-    margin-bottom: 1rem !important; 
-    border-radius: 15px;
-    border: none;
-    ion-label{
-    --color: #122620; /* Color de texto */
+.modal-content {
+  background-color: #f9f5ff; /* Color de fondo */
+  border-radius: 10px; /* Esquinas redondeadas */
+  padding: 20px; /* Espaciado interno */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra */
+}
 
-    }
-  }
-  
-  ion-input {
-    height: 60px;
-    --color: #122620; /* Color de texto */
-  }
+.modal-title {
+  text-align: center; /* Alineación del texto */
+  color: black; /* Color del texto */
+  font-size: 1.5rem; /* Tamaño del texto */
+  margin-bottom: 20px; /* Espaciado inferior */
+}
 
+/* Estilos para el botón de cerrar */
+.modal-button-close {
+  --color: #14248a; /* Color del texto */
+}
 
-
-.formulario{
+.main {
+  margin: auto;
+  background-color: #f9f5ff;
+  min-height: 100vh;
+  max-width: 375px;
+  padding: 3rem 1rem 1.5rem 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  
+  .title {
+    color: #28262c;
+    margin-bottom: 1rem;
+    text-align: center;
+    h2{
+      letter-spacing: 2px;
+    }
+    p{
+      font-size: 0.75rem;
+      font-weight: 300;
+    }
+  }
+  form {
+    width: 100%;
+  }
 }
 
-.logo{
-  border: 0px solid white;
+.input-item {
   display: flex;
   flex-direction: column;
-  text-align: center;
-  .logo-image{
+  width: 100%;
+  margin-bottom: 1rem;
+  input {
+    background-color: white;
+    color: black;
     width: 100%;
-    height: auto;
-    img{
-      width: 100%;
-      height: auto;
-      max-height: 10rem;
-      max-width: 10rem;
+    border: 1px solid rgb(187, 187, 187);
+    border-radius: 10px;
+    padding: 0.75rem 0.5rem;
+    font-size: 1rem;
+    ::placeholder {
+      font-size: 1px !important;
     }
   }
+  label {
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    margin-bottom: 5px;
+    font-size: 0.80rem;
+    color: black;
+  }
+}
 
-  .logo-nombre{
-    h1{
-      letter-spacing: 10px;
-      font-size: 3rem;
-      font-weight: 600;
+ion-button {
+  font-size: 20px;
+  --background: #14248a;
+  margin: 10px;
+}
+
+.enlace-login {
+  font-size: 0.75rem;
+  text-align: center;
+  margin: 0.5rem 0;
+  span {
+    color: #14248a;
+    a {
+      text-decoration: none;
+      cursor: pointer;
+    }
+  }
+}
+.mensaje-error {
+  color: red;
+  font-size: 0.75rem;
+}
+
+.redes-sociales {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  div {
+    padding: 0.5rem;
+    border-radius: 10px;
+    text-align: center;
+    vertical-align: middle;
+    i{
+        color: white;
+    }
+    img {
+      width: 2rem;
+      height: 2rem;
     }
   }
 }
 
-ion-button{
-  --background:rgba(55,204,138,255);
+
+.mi-nueva-clase{
+  display: none;
 }

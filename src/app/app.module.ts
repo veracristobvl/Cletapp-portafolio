@@ -10,8 +10,8 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
-import { InfoPanelComponent } from './info-panel/info-panel.component';
-import { ModificarPerfilModalComponent } from './modificar-perfil-modal/modificar-perfil-modal.component';
+import { InfoPanelComponent } from './pages/info-panel/info-panel.component';
+import { ModificarPerfilModalComponent } from './pages/modificar-perfil-modal/modificar-perfil-modal.component';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import {
@@ -25,8 +25,8 @@ import { getStorage, provideStorage } from '@angular/fire/storage';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AuthGuard } from '@angular/fire/auth-guard';
-import { LoginPage } from './login/login.page';
-import { RegistroPage } from './registro/registro.page';
+import { LoginPage } from './pages/login/login.page';
+import { RegistroPage } from './pages/registro/registro.page';
 
 @NgModule({
   declarations: [
