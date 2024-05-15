@@ -64,6 +64,7 @@ export class RegistroPage implements OnInit {
   }
 
   async registrar() {
+    
     const loading = await this.loadingCtrl.create({
       message: 'Cargando...',
       duration: 1500,

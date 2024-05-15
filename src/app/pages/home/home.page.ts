@@ -4,8 +4,14 @@ import {
   ElementRef,
   ChangeDetectorRef,
 } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import {
+  LoadingController,
+  ModalController,
+  ToastController,
+} from '@ionic/angular';
 import { InfoPanelComponent } from '../info-panel/info-panel.component';
+import { mapConfiguration } from './map-config';
+
 declare var google: any;
 
 @Component({
@@ -15,24 +21,50 @@ declare var google: any;
 })
 export class HomePage implements OnInit {
   map: any = null; // Utilizamos 'any' en lugar de 'google.maps.Map | null'
+  marker: any = null;
   mostrarFormulario = false;
   clickedLocation: { lat: number; lng: number } = { lat: 0, lng: 0 };
   markers: any[] = [];
   searchQuery: string = '';
   markerComments: { [key: string]: string[] } = {}; // Definimos markerComments aquí
-
+  mapConfiguration: any[] = mapConfiguration;
   constructor(
     private modalController: ModalController,
     private elementRef: ElementRef,
     private cdr: ChangeDetectorRef,
+    private toastController: ToastController,
+    private loadingCtrl: LoadingController
   ) {}
 
-  ngOnInit() {
-    this.loadMap();
+  async ngOnInit() {
+    const loading = await this.loadingCtrl.create({
+      message: 'Cargando...',
+      duration: 0,
+    });
+
+    await loading.present();
+
+    try {
+      await this.loadMap();
+    } catch (error) {
+      console.error('Error al cargar el mapa:', error);
+    } finally {
+      await loading.dismiss(); // Oculta el loader cuando finalice la carga del mapa
+    }
   }
 
   loadMap() {
+    // Elemento html donde se mostrará el mapa
     const mapEle: HTMLElement = document.getElementById('map')!;
+
+    //Crear Mapa
+    this.map = new google.maps.Map(mapEle, {
+      zoom: 15,
+      disableDefaultUI: true,
+      styles: this.mapConfiguration,
+    });
+
+    // Obtener la ubicación actual y crear el marcador
     navigator.geolocation.getCurrentPosition(
       (position) => {
         const myLatLng = {
@@ -40,279 +72,64 @@ export class HomePage implements OnInit {
           lng: position.coords.longitude,
         };
 
-        this.map = new google.maps.Map(mapEle, {
-          center: myLatLng,
-          zoom: 15,
-          disableDefaultUI: true,
-          styles: [
-            {
-              "elementType": "geometry",
-              "stylers": [
-                {
-                  "color": "#ebe3cd"
-                }
-              ]
-            },
-            {
-              "elementType": "labels.text.fill",
-              "stylers": [
-                {
-                  "color": "#523735"
-                }
-              ]
-            },
-            {
-              "elementType": "labels.text.stroke",
-              "stylers": [
-                {
-                  "color": "#f5f1e6"
-                }
-              ]
-            },
-            {
-              "featureType": "administrative",
-              "elementType": "geometry",
-              "stylers": [
-                {
-                  "visibility": "off"
-                }
-              ]
-            },
-            {
-              "featureType": "administrative",
-              "elementType": "geometry.stroke",
-              "stylers": [
-                {
-                  "color": "#c9b2a6"
-                }
-              ]
-            },
-            {
-              "featureType": "administrative.land_parcel",
-              "elementType": "geometry.stroke",
-              "stylers": [
-                {
-                  "color": "#dcd2be"
-                }
-              ]
-            },
-            {
-              "featureType": "administrative.land_parcel",
-              "elementType": "labels.text.fill",
-              "stylers": [
-                {
-                  "color": "#ae9e90"
-                }
-              ]
-            },
-            {
-              "featureType": "landscape.natural",
-              "elementType": "geometry",
-              "stylers": [
-                {
-                  "color": "#dfd2ae"
-                }
-              ]
-            },
-            {
-              "featureType": "poi",
-              "stylers": [
-                {
-                  "visibility": "off"
-                }
-              ]
-            },
-            {
-              "featureType": "poi",
-              "elementType": "geometry",
-              "stylers": [
-                {
-                  "color": "#dfd2ae"
-                }
-              ]
-            },
-            {
-              "featureType": "poi",
-              "elementType": "labels.text.fill",
-              "stylers": [
-                {
-                  "color": "#93817c"
-                }
-              ]
-            },
-            {
-              "featureType": "poi.park",
-              "elementType": "geometry.fill",
-              "stylers": [
-                {
-                  "color": "#a5b076"
-                }
-              ]
-            },
-            {
-              "featureType": "poi.park",
-              "elementType": "labels.text.fill",
-              "stylers": [
-                {
-                  "color": "#447530"
-                }
-              ]
-            },
-            {
-              "featureType": "road",
-              "elementType": "geometry",
-              "stylers": [
-                {
-                  "color": "#f5f1e6"
-                }
-              ]
-            },
-            {
-              "featureType": "road",
-              "elementType": "labels.icon",
-              "stylers": [
-                {
-                  "visibility": "off"
-                }
-              ]
-            },
-            {
-              "featureType": "road.arterial",
-              "elementType": "geometry",
-              "stylers": [
-                {
-                  "color": "#fdfcf8"
-                }
-              ]
-            },
-            {
-              "featureType": "road.highway",
-              "elementType": "geometry",
-              "stylers": [
-                {
-                  "color": "#f8c967"
-                }
-              ]
-            },
-            {
-              "featureType": "road.highway",
-              "elementType": "geometry.stroke",
-              "stylers": [
-                {
-                  "color": "#e9bc62"
-                }
-              ]
-            },
-            {
-              "featureType": "road.highway.controlled_access",
-              "elementType": "geometry",
-              "stylers": [
-                {
-                  "color": "#e98d58"
-                }
-              ]
-            },
-            {
-              "featureType": "road.highway.controlled_access",
-              "elementType": "geometry.stroke",
-              "stylers": [
-                {
-                  "color": "#db8555"
-                }
-              ]
-            },
-            {
-              "featureType": "road.local",
-              "elementType": "labels.text.fill",
-              "stylers": [
-                {
-                  "color": "#806b63"
-                }
-              ]
-            },
-            {
-              "featureType": "transit",
-              "stylers": [
-                {
-                  "visibility": "off"
-                }
-              ]
-            },
-            {
-              "featureType": "transit.line",
-              "elementType": "geometry",
-              "stylers": [
-                {
-                  "color": "#dfd2ae"
-                }
-              ]
-            },
-            {
-              "featureType": "transit.line",
-              "elementType": "labels.text.fill",
-              "stylers": [
-                {
-                  "color": "#8f7d77"
-                }
-              ]
-            },
-            {
-              "featureType": "transit.line",
-              "elementType": "labels.text.stroke",
-              "stylers": [
-                {
-                  "color": "#ebe3cd"
-                }
-              ]
-            },
-            {
-              "featureType": "transit.station",
-              "elementType": "geometry",
-              "stylers": [
-                {
-                  "color": "#dfd2ae"
-                }
-              ]
-            },
-            {
-              "featureType": "water",
-              "elementType": "geometry.fill",
-              "stylers": [
-                {
-                  "color": "#b9d3c2"
-                }
-              ]
-            },
-            {
-              "featureType": "water",
-              "elementType": "labels.text.fill",
-              "stylers": [
-                {
-                  "color": "#92998d"
-                }
-              ]
-            }
-          ], // Desactiva los controles predeterminados
+        this.marker = new google.maps.Marker({
+          position: myLatLng,
+          map: this.map,
+          title: 'Ubicación Actual',
+          icon: {
+            url: 'https://storage.googleapis.com/cletapp-images/location-image.gif', // Ruta al GIF animado
+            scaledSize: new google.maps.Size(50, 50) // Tamaño del icono
+          }
         });
-
-        google.maps.event.addListenerOnce(this.map, 'idle', () => {
-          mapEle.classList.add('show-map');
-          google.maps.event.addListener(this.map, 'click', (event: any) => {
-            this.clickedLocation = {
-              lat: event.latLng.lat(),
-              lng: event.latLng.lng(),
-            };
-            this.mostrarFormulario = true;
-            this.cdr.detectChanges();
-            console.log('Estas haciendo click en el mapa');
-          });
-        });
+        this.map.setCenter(myLatLng);
+        this.updateMarker(position.coords.latitude, position.coords.longitude);
       },
       (error) => {
-        console.error('Error al obtener la ubicación:', error);
-        // Puedes manejar el error aquí
+        console.error('Error al obtener la ubicación', error);
       }
     );
+
+    // Actualizar la ubicación cada 2 segundos
+    setInterval(() => {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          this.updateMarker(
+            position.coords.latitude,
+            position.coords.longitude
+          );
+          
+        },
+        (error) => {
+          console.error('Error al obtener la ubicación:', error);
+          // Puedes manejar el error aquí
+        }
+      );
+    }, 2000);
+    // const myLatLng = {
+    //   lat: position.coords.latitude,
+    //   lng: position.coords.longitude,
+    // };
+    // Creación del mapa
+
+    // Crear un marcador en la ubicación actual
+
+    google.maps.event.addListenerOnce(this.map, 'idle', () => {
+      mapEle.classList.add('show-map');
+      google.maps.event.addListener(this.map, 'click', (event: any) => {
+        this.clickedLocation = {
+          lat: event.latLng.lat(),
+          lng: event.latLng.lng(),
+        };
+        this.mostrarFormulario = true;
+        this.cdr.detectChanges();
+        console.log('Estas haciendo click en el mapa');
+      });
+    });
+
+    (error) => {
+      console.error('Error al obtener la ubicación:', error);
+      // Puedes manejar el error aquí
+    };
   }
 
   search() {
@@ -394,5 +211,23 @@ export class HomePage implements OnInit {
   cerrarFormulario() {
     this.mostrarFormulario = false;
     this.cdr.detectChanges();
+  }
+
+  updateMarker(latitude: number, longitude: number) {
+    const myLatLng = { lat: latitude, lng: longitude };
+    if (!this.marker) {
+      this.marker = new google.maps.Marker({
+        position: myLatLng,
+        map: this.map,
+        title: 'Ubicación Actual',
+        icon: {
+          url: 'https://storage.cloud.google.com/imagenes-cletapp/location-image.gif', // Ruta al GIF animado
+          scaledSize: new google.maps.Size(50, 50) // Tamaño del icono
+        }
+      });
+    } else {
+      this.marker.setPosition(myLatLng);
+    }
+    
   }
 }

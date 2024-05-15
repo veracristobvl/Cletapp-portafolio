@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { Platform } from '@ionic/angular';
+import { LoadingController, Platform, ToastController } from '@ionic/angular';
 import { Auth, signInWithEmailAndPassword } from '@angular/fire/auth';
 
 @Component({
@@ -23,6 +23,8 @@ export class LoginPage implements OnInit {
     private authservice: AuthService,
     private platform: Platform,
     private afAuth: Auth,
+    private toastController: ToastController,
+    private loadingCtrl: LoadingController,
 
   ) {
     // Configuración de formulario
@@ -36,19 +38,24 @@ export class LoginPage implements OnInit {
   }
 
   
-  login() {
+  async login() {
+    const loading = await this.loadingCtrl.create({
+      message: 'Cargando...',
+      duration: 1500,
+    });
     const {email, password} = this.formularioLogin.value
     
+    await loading.present()
     this.authservice
       .login(email, password)
       .then((res) => {
         console.log(res);
         this.router.navigate(['/home']);
-        this.platform.ready().then(() => {
-          setTimeout(() => {
-            window.location.reload();
-          }, 200); // Delay de 2000 milisegundos (2 segundos)
-        });
+        // this.platform.ready().then(() => {
+        //   setTimeout(() => {
+        //     window.location.reload();
+        //   }, 200); // Delay de 2000 milisegundos (2 segundos)
+        // });
       })
       .catch((err) => console.log(err));
   }
@@ -104,4 +111,16 @@ export class LoginPage implements OnInit {
   }
 
   ngOnInit() {}
+
+
+
+  async presentToast(position: 'top' | 'middle' | 'bottom', mensaje, duration) {
+    const toast = await this.toastController.create({
+      message: mensaje,
+      duration: duration,
+      position: position,
+    });
+
+    await toast.present();
+  }
 }
