@@ -1,0 +1,28 @@
+<ul>
+  <li
+    *ngIf="authservice.isLoggedIn() && authservice.isGuestUser() == false"
+    (click)="perfil()"
+  >
+  <ion-icon name="home-outline"></ion-icon>
+  
+    <a>Inicio</a>
+  </li>
+  <li *ngIf="authservice.isLoggedIn()" (click)="home()" class="middle-option">
+    <a>
+      <ion-icon name="navigate-outline"></ion-icon>
+      
+    </a>
+  </li>
+  <li
+    *ngIf="authservice.isLoggedIn() && authservice.isGuestUser() == false"
+    (click)="perfil()"
+  >
+  <ion-icon name="person-outline"></ion-icon>
+  
+    <a>Perfil</a>
+  </li>
+
+
+  
+
+</ul>

@@ -1,20 +1,23 @@
-<ion-header [translucent]="true">
+<!-- <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
       Mapas
     </ion-title>
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
 
 <ion-content>
+  <div class="ion-searchbar ">
 
-  <ion-searchbar [(ngModel)]="searchQuery" 
-                (ionChange)="search()" 
-                placeholder="Buscar lugares" 
-                animated="true" 
-                show-clear-button="focus" 
-                color="medium">
+    <ion-searchbar [(ngModel)]="searchQuery"
+     class="custom"
+    (ionChange)="search()" 
+    placeholder="Buscar calle..." 
+    animated="true" 
+    show-clear-button="focus" 
+    >
   </ion-searchbar>
+</div>
 
   <div id="map"></div>
   <ion-grid style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1;">

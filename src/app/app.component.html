@@ -1,5 +1,5 @@
 <ion-app>
-  <ion-menu contentId="main-content" [disabled]="!shouldShowMenu()">
+  <ion-menu contentId="main-content" [disabled]="shouldShowMenu()">
     <ion-header>
       <ion-toolbar>
         <ion-title>Menú</ion-title>
@@ -22,8 +22,9 @@
     </ion-content>
   </ion-menu>
 
+  <app-menu *ngIf="!shouldShowMenu()"></app-menu>
   <ion-router-outlet id="main-content"></ion-router-outlet>
-
+<!-- 
   <ion-header>
     <ion-toolbar>
       <ion-buttons slot="start">
@@ -33,5 +34,7 @@
         Cletapp
       </ion-title>
     </ion-toolbar>
-  </ion-header>
+  </ion-header> -->
+  
+
 </ion-app>

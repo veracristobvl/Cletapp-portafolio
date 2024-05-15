@@ -27,6 +27,7 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AuthGuard } from '@angular/fire/auth-guard';
 import { LoginPage } from './pages/login/login.page';
 import { RegistroPage } from './pages/registro/registro.page';
+import { MenuComponent } from './components/menu/menu.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { RegistroPage } from './pages/registro/registro.page';
     InfoPanelComponent,
     ModificarPerfilModalComponent,
     LoginPage,
-    RegistroPage
+    RegistroPage,
+    MenuComponent
   ],
   imports: [
     BrowserModule,

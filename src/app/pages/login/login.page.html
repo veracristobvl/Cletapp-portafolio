@@ -66,6 +66,7 @@
         >
           La contraseña es requerida.
         </div>
+        <span style="font-size: 0.75rem; margin-top: 0.5rem;"><a style="text-decoration: none;" href=""(click)="forgotPassword()">Olvidaste tu contraseña?</a></span>
       </div>
       <!-- Fin Input de Contraseña -->
 
@@ -79,12 +80,14 @@
       <!-- <ion-button expand="block" (click)="login()">INICIAR SESIÓN</ion-button> -->
 
       <ion-loading #loading></ion-loading>
+      
+      <div class="enlace-login">
+        <p>
+          Aún no tienes una cuenta?
+          <span><a routerLink="/registro" href="">Registrate</a></span>
+        </p>
+      </div>
 
-      <ion-button 
-        routerLink="/registro" 
-        expand="block">
-        Registrate
-      </ion-button>
 
       <ion-button
         expand="block"
@@ -93,8 +96,7 @@
       >
     </form>
 
-    <a style="font-size: 18px; color: black; text-align: center;" (click)="forgotPassword()">¿Olvidaste tu contraseña?</a>
-
+    
     <!-- Inicio de login con red social -->
     <div
       style="
@@ -109,7 +111,7 @@
         style="
           position: relative;
           bottom: 17.2px;
-          background-color: #14248a;
+          background-color: #f9f5ff;
           width: fit-content;
           padding: 0.5rem;
           font-size: 0.75rem;

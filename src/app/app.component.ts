@@ -46,7 +46,7 @@ salir() {
 }
 
 shouldShowMenu(): boolean {
-  return this.authservice.isLoggedIn() && !['/login', '/registro'].includes(this.router.url);
+  return ['/login', '/registro', '/'].includes(this.router.url);
 }
 
 }

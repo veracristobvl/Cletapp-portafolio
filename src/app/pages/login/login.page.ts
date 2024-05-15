@@ -17,6 +17,7 @@ export class LoginPage implements OnInit {
   password: string = '';
   emailRecuperacion: string = '';
   mostrarFormulario: boolean = false;
+  shouldShowMenu
   constructor(
     private router: Router,
     private authservice: AuthService,

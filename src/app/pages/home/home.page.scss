@@ -32,8 +32,33 @@ ion-content {
 }
 
 ion-searchbar {
-  background-color: #f9f5ff;
+  width: 100%;
+  position: absolute;
+  top: 5rem;
+  
+  margin: 0 auto;
+  z-index: 9;
+  padding: 1rem !important;
+  font-weight: bold;
 }
+.ion-searchbar{
+  position: relative;
+  border-radius: 50%;
+  width: 85%;
+  margin: 0 auto;
+}
+
+ion-searchbar.custom {
+  --background: white !important;
+  --color: black;
+  --placeholder-color: #4b4a4a;
+  --icon-color: black;
+  --clear-button-color: #fff;
+  --border-radius: 5px;
+  padding: 1rem 0;
+}
+
+
 
 .formulario-animado {
   animation: slideIn 0.5s ease-out;

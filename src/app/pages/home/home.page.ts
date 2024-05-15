@@ -1,7 +1,11 @@
-import { Component, OnInit, ElementRef,ChangeDetectorRef   } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ElementRef,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { InfoPanelComponent } from '../info-panel/info-panel.component';
-
 declare var google: any;
 
 @Component({
@@ -9,17 +13,19 @@ declare var google: any;
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-
 export class HomePage implements OnInit {
   map: any = null; // Utilizamos 'any' en lugar de 'google.maps.Map | null'
   mostrarFormulario = false;
-  clickedLocation: { lat: number, lng: number } = { lat: 0, lng: 0 };
+  clickedLocation: { lat: number; lng: number } = { lat: 0, lng: 0 };
   markers: any[] = [];
   searchQuery: string = '';
   markerComments: { [key: string]: string[] } = {}; // Definimos markerComments aquí
 
-
-  constructor(private modalController: ModalController, private elementRef: ElementRef, private cdr: ChangeDetectorRef) {}
+  constructor(
+    private modalController: ModalController,
+    private elementRef: ElementRef,
+    private cdr: ChangeDetectorRef,
+  ) {}
 
   ngOnInit() {
     this.loadMap();
@@ -27,59 +33,286 @@ export class HomePage implements OnInit {
 
   loadMap() {
     const mapEle: HTMLElement = document.getElementById('map')!;
-    navigator.geolocation.getCurrentPosition((position) => {
-      const myLatLng = { lat: position.coords.latitude, lng: position.coords.longitude };
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const myLatLng = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        };
 
-      this.map = new google.maps.Map(mapEle, {
-        center: myLatLng,
-        zoom: 15,
-        disableDefaultUI: true,
-        styles: [
-          {
-            featureType: 'all',
-            elementType: 'labels',
-            stylers: [
-              { visibility: 'on' } // Oculta todas las etiquetas
-            ]
-          },
-          {
-            featureType: 'road',
-            elementType: 'geometry',
-            stylers: [
-              { lightness: 100 }, // Hace que las carreteras sean más claras
-              { visibility: 'simplified' } // Simplifica la visualización de las carreteras
-            ]
-          },
-          {
-            featureType: 'water',
-            elementType: 'geometry',
-            stylers: [
-              { color: '#5e72e4' } // Color azul claro para el agua
-            ]
-          },
-          {
-            featureType: 'landscape',
-            elementType: 'geometry',
-            stylers: [
-              { color: '#f8f9fe' } // Color claro para el paisaje
-            ]
-          }
-        ] // Desactiva los controles predeterminados
-      });
-      
-      google.maps.event.addListenerOnce(this.map, 'idle', () => {
-        mapEle.classList.add('show-map');
-        google.maps.event.addListener(this.map, 'click', (event: any) => {
-          this.clickedLocation = { lat: event.latLng.lat(), lng: event.latLng.lng() };
-          this.mostrarFormulario = true;
-          this.cdr.detectChanges(); 
-          console.log("Estas haciendo click en el mapa");
+        this.map = new google.maps.Map(mapEle, {
+          center: myLatLng,
+          zoom: 15,
+          disableDefaultUI: true,
+          styles: [
+            {
+              "elementType": "geometry",
+              "stylers": [
+                {
+                  "color": "#ebe3cd"
+                }
+              ]
+            },
+            {
+              "elementType": "labels.text.fill",
+              "stylers": [
+                {
+                  "color": "#523735"
+                }
+              ]
+            },
+            {
+              "elementType": "labels.text.stroke",
+              "stylers": [
+                {
+                  "color": "#f5f1e6"
+                }
+              ]
+            },
+            {
+              "featureType": "administrative",
+              "elementType": "geometry",
+              "stylers": [
+                {
+                  "visibility": "off"
+                }
+              ]
+            },
+            {
+              "featureType": "administrative",
+              "elementType": "geometry.stroke",
+              "stylers": [
+                {
+                  "color": "#c9b2a6"
+                }
+              ]
+            },
+            {
+              "featureType": "administrative.land_parcel",
+              "elementType": "geometry.stroke",
+              "stylers": [
+                {
+                  "color": "#dcd2be"
+                }
+              ]
+            },
+            {
+              "featureType": "administrative.land_parcel",
+              "elementType": "labels.text.fill",
+              "stylers": [
+                {
+                  "color": "#ae9e90"
+                }
+              ]
+            },
+            {
+              "featureType": "landscape.natural",
+              "elementType": "geometry",
+              "stylers": [
+                {
+                  "color": "#dfd2ae"
+                }
+              ]
+            },
+            {
+              "featureType": "poi",
+              "stylers": [
+                {
+                  "visibility": "off"
+                }
+              ]
+            },
+            {
+              "featureType": "poi",
+              "elementType": "geometry",
+              "stylers": [
+                {
+                  "color": "#dfd2ae"
+                }
+              ]
+            },
+            {
+              "featureType": "poi",
+              "elementType": "labels.text.fill",
+              "stylers": [
+                {
+                  "color": "#93817c"
+                }
+              ]
+            },
+            {
+              "featureType": "poi.park",
+              "elementType": "geometry.fill",
+              "stylers": [
+                {
+                  "color": "#a5b076"
+                }
+              ]
+            },
+            {
+              "featureType": "poi.park",
+              "elementType": "labels.text.fill",
+              "stylers": [
+                {
+                  "color": "#447530"
+                }
+              ]
+            },
+            {
+              "featureType": "road",
+              "elementType": "geometry",
+              "stylers": [
+                {
+                  "color": "#f5f1e6"
+                }
+              ]
+            },
+            {
+              "featureType": "road",
+              "elementType": "labels.icon",
+              "stylers": [
+                {
+                  "visibility": "off"
+                }
+              ]
+            },
+            {
+              "featureType": "road.arterial",
+              "elementType": "geometry",
+              "stylers": [
+                {
+                  "color": "#fdfcf8"
+                }
+              ]
+            },
+            {
+              "featureType": "road.highway",
+              "elementType": "geometry",
+              "stylers": [
+                {
+                  "color": "#f8c967"
+                }
+              ]
+            },
+            {
+              "featureType": "road.highway",
+              "elementType": "geometry.stroke",
+              "stylers": [
+                {
+                  "color": "#e9bc62"
+                }
+              ]
+            },
+            {
+              "featureType": "road.highway.controlled_access",
+              "elementType": "geometry",
+              "stylers": [
+                {
+                  "color": "#e98d58"
+                }
+              ]
+            },
+            {
+              "featureType": "road.highway.controlled_access",
+              "elementType": "geometry.stroke",
+              "stylers": [
+                {
+                  "color": "#db8555"
+                }
+              ]
+            },
+            {
+              "featureType": "road.local",
+              "elementType": "labels.text.fill",
+              "stylers": [
+                {
+                  "color": "#806b63"
+                }
+              ]
+            },
+            {
+              "featureType": "transit",
+              "stylers": [
+                {
+                  "visibility": "off"
+                }
+              ]
+            },
+            {
+              "featureType": "transit.line",
+              "elementType": "geometry",
+              "stylers": [
+                {
+                  "color": "#dfd2ae"
+                }
+              ]
+            },
+            {
+              "featureType": "transit.line",
+              "elementType": "labels.text.fill",
+              "stylers": [
+                {
+                  "color": "#8f7d77"
+                }
+              ]
+            },
+            {
+              "featureType": "transit.line",
+              "elementType": "labels.text.stroke",
+              "stylers": [
+                {
+                  "color": "#ebe3cd"
+                }
+              ]
+            },
+            {
+              "featureType": "transit.station",
+              "elementType": "geometry",
+              "stylers": [
+                {
+                  "color": "#dfd2ae"
+                }
+              ]
+            },
+            {
+              "featureType": "water",
+              "elementType": "geometry.fill",
+              "stylers": [
+                {
+                  "color": "#b9d3c2"
+                }
+              ]
+            },
+            {
+              "featureType": "water",
+              "elementType": "labels.text.fill",
+              "stylers": [
+                {
+                  "color": "#92998d"
+                }
+              ]
+            }
+          ], // Desactiva los controles predeterminados
         });
-      });
-    }, (error) => {
-      console.error('Error al obtener la ubicación:', error);
-      // Puedes manejar el error aquí
-    });
+
+        google.maps.event.addListenerOnce(this.map, 'idle', () => {
+          mapEle.classList.add('show-map');
+          google.maps.event.addListener(this.map, 'click', (event: any) => {
+            this.clickedLocation = {
+              lat: event.latLng.lat(),
+              lng: event.latLng.lng(),
+            };
+            this.mostrarFormulario = true;
+            this.cdr.detectChanges();
+            console.log('Estas haciendo click en el mapa');
+          });
+        });
+      },
+      (error) => {
+        console.error('Error al obtener la ubicación:', error);
+        // Puedes manejar el error aquí
+      }
+    );
   }
 
   search() {
@@ -92,12 +325,16 @@ export class HomePage implements OnInit {
     };
     const service = new google.maps.places.PlacesService(this.map);
     service.findPlaceFromQuery(request, (results: any[], status: any) => {
-      if (status === google.maps.places.PlacesServiceStatus.OK && results && results.length) {
+      if (
+        status === google.maps.places.PlacesServiceStatus.OK &&
+        results &&
+        results.length
+      ) {
         const place = results[0];
 
         if (this.map) {
           this.map.setCenter(place.geometry.location);
-          this.map.setZoom(15)
+          this.map.setZoom(15);
         } else {
           console.error('El mapa aún no se ha inicializado.');
         }
@@ -107,7 +344,8 @@ export class HomePage implements OnInit {
 
   addMarker() {
     if (this.clickedLocation.lat !== 0 && this.clickedLocation.lng !== 0) {
-      const nombreLugarInput: HTMLInputElement = document.querySelector('#nombreLugarInput')!;
+      const nombreLugarInput: HTMLInputElement =
+        document.querySelector('#nombreLugarInput')!;
       const nombreLugar: string = nombreLugarInput.value.trim();
       if (!nombreLugar) {
         console.log('Por favor, ingresa un nombre para el lugar.');
@@ -118,7 +356,7 @@ export class HomePage implements OnInit {
         map: this.map,
         icon: {
           url: 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png',
-          scaledSize: new google.maps.Size(50, 50)
+          scaledSize: new google.maps.Size(50, 50),
         },
         animation: google.maps.Animation.DROP,
       });
@@ -129,7 +367,7 @@ export class HomePage implements OnInit {
       const lng = marker.position.lng();
       const titulo = marker.getPosition();
 
-      google.maps.event.addListener(marker, 'click', async() => {
+      google.maps.event.addListener(marker, 'click', async () => {
         const modal = await this.modalController.create({
           component: InfoPanelComponent,
           componentProps: {
@@ -138,7 +376,7 @@ export class HomePage implements OnInit {
             lat: lat,
             lng: lng,
             titulo: titulo,
-          }
+          },
         });
         await modal.present();
       });
@@ -157,5 +395,4 @@ export class HomePage implements OnInit {
     this.mostrarFormulario = false;
     this.cdr.detectChanges();
   }
-
 }
