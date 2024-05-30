@@ -1,7 +1,75 @@
+* {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 ion-avatar {
-    --border-radius: 50%;
-    width: 150px;
-    height: 150px;
-    border: 3px solid #d49462;
-    background-color: #f0f0f0;
+  --border-radius: 50%;
+  width: 160px;
+  height: 160px;
+  border: 3px solid #ebe3cd;
+  color: black;
+}
+
+ion-card {
+  --background: #ece8f2;
+}
+
+ion-content {
+  --background: #f9f5ff;
+}
+
+ion-item {
+  --background: white;
+  --color: black;
+}
+
+.back-button{
+    position: fixed;
+    color: white;
+}
+.top-section {
+  height: 15rem;
+  background: rgb(248, 177, 47);
+  background: linear-gradient(
+    90deg,
+    rgba(248, 177, 47, 1) 0%,
+    rgba(226, 109, 21, 1) 0%,
+    rgba(245, 173, 114, 1) 100%
+  );
+ 
+  border-radius: 0 0 100% 100%;
+  text-align: center;
+  .top-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+    justify-content: center;
+    position: relative;
+    top: 30%;
+    h1{
+        text-transform: capitalize;
+        color: #ebe3cd
+    }
+  }
+  
+}
+.user-data-row{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 0;
+  border-bottom: 3px solid #ebe3cd;
+  
+  div{
+    display: flex;
+    gap: 1rem  ;
+    align-items: center;
+  }
+  .ion-icon{
+    justify-self: end;
+  }
 }

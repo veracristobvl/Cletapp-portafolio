@@ -1,18 +1,87 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Perfil</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-  <div style="display: flex; justify-content: center; margin: 20px;">
-    <ion-avatar (click)="seleccionarNuevaFoto()">
-      <img *ngIf="photoURL" [src]="photoURL" alt="Foto de perfil">
-      <ion-icon name="create-outline"></ion-icon>
-    </ion-avatar>
-  </div>
+  <div class="container">
+    <ion-buttons slot="start" class="back-button">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <div class="top-section">
+      <div class="top-content">
+        <h1 *ngIf="userData">{{userData.nombre}} {{userData.apellido}}</h1>
 
-  <ion-card *ngIf="userData">
+        <ion-avatar (click)="seleccionarNuevaFoto()" class="foto-perfil">
+          <img *ngIf="photoURL" [src]="photoURL" alt="Foto de perfil" />
+          <!-- <ion-icon name="create-outline"></ion-icon> -->
+        </ion-avatar>
+      </div>
+    </div>
+
+    <div *ngIf="userData" style="margin-top: 5rem; padding:  0 3rem;">
+      
+        
+          <div class="user-data-row">
+            <div>
+
+              <ion-icon name="person-outline">  </ion-icon>
+              <p>{{userData.nombre}}</p>
+            </div>
+            <ion-icon
+              slot="end"
+              (click)="abrirModalModificar('nombre', userData.nombre)"
+              name="pencil-outline"
+            ></ion-icon>
+          </div>
+          
+          <div class="user-data-row">
+            <div>
+
+              <ion-icon name="person-outline">  </ion-icon>
+              <p>{{userData.apellido}}</p>
+            </div>
+              <ion-icon
+              slot="end"
+              (click)="abrirModalModificar('apellido', userData.apellido)"
+              name="pencil-outline"
+              ></ion-icon>
+          </div>
+          <div class="user-data-row">
+            <div>
+
+              <ion-icon name="id-card-outline"></ion-icon>
+              <p>{{userData.nickname}}</p>
+            </div>
+            <ion-icon
+              slot="end"
+              (click)="abrirModalModificar('nickname', userData.nickname)"
+              name="pencil-outline"
+            ></ion-icon>
+          </div>
+          <div class="user-data-row">
+            <div>
+              <ion-icon name="mail-outline">  </ion-icon>
+              <p>{{userData.email}}</p>
+            </div>
+          </div>
+        
+      
+    </div>
+    <ion-button (click)="salir()" expand="block" shape="round" style="margin: 20px auto 0 auto; --background: #14248a; max-width: 10rem;">
+      Cerrar Sesión
+    </ion-button> 
+  </div>
+</ion-content>
+
+<!-- <div style="display: flex; justify-content: center; margin: 50px;">
+  <ion-avatar (click)="seleccionarNuevaFoto()">
+    <img *ngIf="photoURL" [src]="photoURL" alt="Foto de perfil">
+    <ion-icon name="create-outline"></ion-icon>
+  </ion-avatar>
+</div>
+
+<ion-button (click)="salir()" expand="block" shape="round" style="margin-top: 20px; --background: #14248a;">
+  Salir
+</ion-button> 
+
+
+<ion-card *ngIf="userData" style="margin-top: 5rem;">
     <ion-card-content>
       <ion-list lines="full">
         <ion-item>
@@ -37,4 +106,4 @@
       </ion-list>
     </ion-card-content>
   </ion-card>
-</ion-content>
+-->

@@ -7,6 +7,7 @@ import {
   sendPasswordResetEmail,
   signInWithPopup,
   GoogleAuthProvider,
+  FacebookAuthProvider
 } from '@angular/fire/auth';
 import {
   getFirestore,
@@ -105,6 +106,17 @@ export class AuthService {
       // El usuario ha iniciado sesión correctamente
     } catch (error) {
       console.error('Error al iniciar sesión con Google:', error);
+      throw error;
+    }
+  }
+
+  async signInWithFacebook() {
+    try {
+      const provider = new FacebookAuthProvider();
+      const result = await signInWithPopup(this.auth, provider);
+      // El usuario ha iniciado sesión correctamente
+    } catch (error) {
+      console.error('Error al iniciar sesión con Facebook:', error);
       throw error;
     }
   }

@@ -1,0 +1,61 @@
+* {
+  font-family: "Poppins", sans-serif;
+}
+ul {
+  list-style: none; /* Quita los estilos de la lista */
+  margin: 0;
+  padding: 1rem 0;
+  text-align: center; /* Centra horizontalmente las opciones */
+  background-color: #c46c29;
+  display: flex;
+  justify-content: space-around;
+  max-width: 500px;
+  margin: auto;
+  min-height: 82px;
+  div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    gap: 1rem;
+    width: 35%; 
+  }
+}
+
+ul  li {
+  display: flex;
+  flex-direction: column; /* Muestra las opciones en línea */
+  cursor: pointer;
+  
+  a {
+    color: white; /* Cambia el color del texto según tus preferencias */
+    text-decoration: none; /* Quita el subrayado de los enlaces */
+    padding: 5px 10px; /* Añade espacio interno a los enlaces */
+    border-radius: 5px; /* Añade bordes redondeados a los enlaces */
+    font-size: 0.75rem;
+  }
+}
+
+.right-half .left-half {
+  
+}
+ul .middle-option {
+  position: absolute;
+  bottom: 3rem;
+  z-index: 999;
+  background-color: #c46c29;
+  border-radius: 20px  ;
+  padding: 0.5rem;
+  opacity: 1; 
+  border: 5px solid rgba(235,227,205,255);
+}
+ul li:hover {
+  background-color: #f6a668; /* Cambia el color de fondo al pasar el ratón por encima */
+}
+
+ion-icon {
+  margin: auto;
+  color: white;
+  font-size: 1rem;
+  width: 1.25rem;
+  height: 1.25rem;
+}

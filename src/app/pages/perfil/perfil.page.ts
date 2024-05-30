@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Firestore, collection, getDocs, query, where, updateDoc, doc} from '@angular/fire/firestore';
 import { ModalController } from '@ionic/angular';
-import { ModificarPerfilModalComponent } from '../../pages/modificar-perfil-modal/modificar-perfil-modal.component';
+import { ModificarPerfilModalComponent } from '../modificar-perfil-modal/modificar-perfil-modal.component';
 import { Storage, ref, uploadBytes, getDownloadURL } from '@angular/fire/storage';
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-perfil',
@@ -16,19 +16,17 @@ export class PerfilPage implements OnInit {
   userData: any;
   photoURL: string;
 
-  constructor(private auth: AuthService, private firestore: Firestore, private modalController: ModalController,private storage: Storage,) { }
+  constructor(private auth: AuthService, private router: Router, private firestore: Firestore, private modalController: ModalController,private storage: Storage,) { }
 
   async ngOnInit() {
     const user = this.auth.getCurrentUser();
     if (user) {
       const querySnapshot = await getDocs(query(collection(this.firestore, 'users'), where('uid', '==', user.uid)));
-      querySnapshot.forEach(async (doc) => {
-        this.userData = doc.data();
-        this.userData.id = doc.id;555
-        const photoRef = ref(this.storage, this.userData.photoURL); // Referencia a la foto de perfil
-        this.photoURL = await getDownloadURL(photoRef); // URL de descarga de la foto de perfil
-        console.log(this.userData);
-      });
+      if (!querySnapshot.empty) {
+        const userData = querySnapshot.docs[0].data();
+        this.userData = userData;
+        this.photoURL = await this.auth.obtenerURLFotoPerfil(user.uid);
+      }
     }
   }
 
@@ -73,7 +71,20 @@ export class PerfilPage implements OnInit {
       querySnapshot.forEach(async (doc) => {
         await updateDoc(doc.ref, { [campo]: nuevoValor });
         this.userData[campo] = nuevoValor;
+        localStorage.setItem('userData', JSON.stringify(this.userData));
       });
     }
+  }
+  salir() {
+    this. auth.logout()
+    .then(res => {
+      this.router.navigate(['/login']);
+      console.log(res);
+      this.userData = null;
+      this.photoURL = null;    
+    })
+    .catch(error => {
+      console.log(error);
+    })
   }
 }

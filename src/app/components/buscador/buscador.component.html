@@ -1,0 +1,15 @@
+<ion-searchbar 
+class="custom"
+placeholder="Buscar calle..." 
+animated="true" 
+show-clear-button="focus" 
+(input)="onSearchChange()"
+[(ngModel)]="searchQuery"  
+>
+</ion-searchbar>
+
+<ul *ngIf="predictions.length > 0" class="predictions-list">
+    <li *ngFor="let prediction of predictions" (click)="selectPrediction(prediction)">
+      {{ prediction.description }}
+    </li>
+</ul>
