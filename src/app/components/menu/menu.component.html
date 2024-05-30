@@ -1,28 +1,47 @@
 <ul>
-  <li
-    *ngIf="authservice.isLoggedIn() && authservice.isGuestUser() == false"
-    (click)="perfil()"
-  >
-  <ion-icon name="home-outline"></ion-icon>
+
+  <div class="right-half">
+    <li
+      *ngIf="authservice.isLoggedIn() && authservice.isGuestUser() == false"
+      (click)="perfil()"
+    >
+      <ion-icon name="home-outline"></ion-icon>
+
+      <a>Inicio</a>
+    </li>
+    <li
+      *ngIf="authservice.isLoggedIn() && authservice.isGuestUser() == false"
+      (click)="perfil()"
+    >
+      <ion-icon name="person-outline"></ion-icon>
+
+      <a>Perfil</a>
+    </li>
   
-    <a>Inicio</a>
-  </li>
+  </div>
+
   <li *ngIf="authservice.isLoggedIn()" (click)="home()" class="middle-option">
-    <a>
+    <a (click)="centrarMapa()">
       <ion-icon name="navigate-outline"></ion-icon>
-      
     </a>
   </li>
-  <li
-    *ngIf="authservice.isLoggedIn() && authservice.isGuestUser() == false"
-    (click)="perfil()"
-  >
-  <ion-icon name="person-outline"></ion-icon>
-  
-    <a>Perfil</a>
-  </li>
 
+  <div class="left-half">
+    <li
+      *ngIf="authservice.isLoggedIn() && authservice.isGuestUser() == false"
+      (click)="agregarEstacionamiento()"
+    >
+      <ion-icon name="add-circle-outline"></ion-icon>
 
-  
+      <a>Agregar </a>
+    </li>
+    <li
+      *ngIf="authservice.isLoggedIn() && authservice.isGuestUser() == false"
+      (click)="agregarEstacionamiento()"
+    >
+      <ion-icon name="settings-outline"></ion-icon>
 
+      <a>Ajustes</a>
+    </li>
+  </div>
 </ul>

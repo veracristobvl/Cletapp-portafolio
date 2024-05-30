@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { MapService } from 'src/app/services/map.service';
 
 @Component({
   selector: 'app-menu',
@@ -9,7 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class MenuComponent  implements OnInit {
 
-  constructor( public authservice: AuthService, private router: Router) { }
+  constructor( public authservice: AuthService, private router: Router, private mapService: MapService) { }
 
   ngOnInit() {}
   perfil() {
@@ -27,5 +28,11 @@ export class MenuComponent  implements OnInit {
     .catch(error => {
       console.log(error);
     })
+  }
+  centrarMapa() {
+    this.mapService.centrarMapa();
+  }
+  agregarEstacionamiento(){
+    console.log('hola ');
   }
 }

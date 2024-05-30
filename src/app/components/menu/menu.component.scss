@@ -9,22 +9,35 @@ ul {
   background-color: #c46c29;
   display: flex;
   justify-content: space-around;
+  max-width: 500px;
+  margin: auto;
+  min-height: 82px;
+  div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    gap: 1rem;
+    width: 35%; 
+  }
 }
 
-ul li {
+ul  li {
   display: flex;
   flex-direction: column; /* Muestra las opciones en línea */
-  margin: 0 10px; /* Añade espaciado entre las opciones */
+  cursor: pointer;
+  
+  a {
+    color: white; /* Cambia el color del texto según tus preferencias */
+    text-decoration: none; /* Quita el subrayado de los enlaces */
+    padding: 5px 10px; /* Añade espacio interno a los enlaces */
+    border-radius: 5px; /* Añade bordes redondeados a los enlaces */
+    font-size: 0.75rem;
+  }
 }
 
-ul li a {
-  color: white; /* Cambia el color del texto según tus preferencias */
-  text-decoration: none; /* Quita el subrayado de los enlaces */
-  padding: 5px 10px; /* Añade espacio interno a los enlaces */
-  border-radius: 5px; /* Añade bordes redondeados a los enlaces */
-  font-size: 0.75rem;
+.right-half .left-half {
+  
 }
-
 ul .middle-option {
   position: absolute;
   bottom: 3rem;

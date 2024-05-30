@@ -1,33 +1,35 @@
 /* Estilos para el menú lateral */
 
 ion-menu {
-    --ion-background-color: #c7c4cc; /* Color de fondo */
-    color: #ffffff; /* Color de texto */
-  }
-  
-  /* Estilos para los elementos del menú */
-  ion-item {
-    color: black; /* Color de texto */
-    --background: white;
-  }
-  
-  /* Estilos para el botón de inicio de sesión */
-  ion-item.log-in {
-    --color: #ffffff; /* Color de texto */
-  }
+  --ion-background-color: #c7c4cc; /* Color de fondo */
+  color: #ffffff; /* Color de texto */
+}
 
-  ion-menu-button {
-    color: black; /* Color de texto */
-  }
+/* Estilos para los elementos del menú */
+ion-item {
+  color: black; /* Color de texto */
+  --background: white;
+}
 
+/* Estilos para el botón de inicio de sesión */
+ion-item.log-in {
+  --color: #ffffff; /* Color de texto */
+}
 
+ion-menu-button {
+  color: black; /* Color de texto */
+}
 
+ion-content {
+  z-index: 1;
+}
 
 app-menu {
+  z-index: 1;
   position: absolute;
   bottom: 0;
   width: 100%;
-  /* Cambia el color de fondo según tus preferencias */
   z-index: 999;
-  border-radius: 10px 10px 0 0 ;
+  border-radius: 10px 10px 0 0;
+  
 }

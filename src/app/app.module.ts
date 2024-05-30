@@ -36,7 +36,7 @@ import { MenuComponent } from './components/menu/menu.component';
     ModificarPerfilModalComponent,
     LoginPage,
     RegistroPage,
-    MenuComponent
+    MenuComponent,
   ],
   imports: [
     BrowserModule,

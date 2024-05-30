@@ -1,5 +1,5 @@
 <ion-app>
-  <ion-menu contentId="main-content" [disabled]="shouldShowMenu()">
+  <!-- <ion-menu contentId="main-content" [disabled]="shouldShowMenu()">
     <ion-header>
       <ion-toolbar>
         <ion-title>Menú</ion-title>
@@ -20,7 +20,7 @@
         </ion-item>
       </ion-list>
     </ion-content>
-  </ion-menu>
+  </ion-menu> -->
 
   <app-menu *ngIf="!shouldShowMenu()"></app-menu>
   <ion-router-outlet id="main-content"></ion-router-outlet>

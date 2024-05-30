@@ -31,32 +31,52 @@ ion-content {
   }
 }
 
-ion-searchbar {
+.ion-searchbar {
   width: 100%;
+  
+  justify-content: center;
+  //max-width: 500px;
   position: absolute;
   top: 5rem;
-  
-  margin: 0 auto;
   z-index: 9;
-  padding: 1rem !important;
+  padding: 0 1rem ;
+  //padding: 1rem !important;
   font-weight: bold;
-}
-.ion-searchbar{
-  position: relative;
-  border-radius: 50%;
-  width: 85%;
+  ion-searchbar{
+  max-width: 500px;
   margin: 0 auto;
+  .custom {
+    --background: white !important;
+    --color: black;
+    --placeholder-color: #4b4a4a;
+    --icon-color: black;
+    --clear-button-color: #fff;
+    --border-radius: 5px;
+    padding: 0 !important;
+  }
+  }
+}
+// .ion-searchbar{
+  //   position: relative;
+  //   border-radius: 50%;
+//   width: 85%;
+//   margin: 0 auto;
+// }
+
+.predictions-list{
+  z-index: 9;
+  background-color: white;
+  list-style-type: none;
+  padding: 0 !important;
+  margin: 0 !important;
+  position: relative;
+  bottom: 1rem;
+  li{
+    padding: 1rem 0 ;
+
+  }
 }
 
-ion-searchbar.custom {
-  --background: white !important;
-  --color: black;
-  --placeholder-color: #4b4a4a;
-  --icon-color: black;
-  --clear-button-color: #fff;
-  --border-radius: 5px;
-  padding: 1rem 0;
-}
 
 
 
@@ -119,4 +139,7 @@ ion-searchbar.custom {
 // .info-close:hover {
 //   background-color: #0056b3;
 // }
+
+
+
 
